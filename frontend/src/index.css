@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --lab-bg: #f1f5f9;
+  --lab-surface: #ffffff;
+  --lab-elevated: #f8fafc;
+  --lab-border: rgba(15, 23, 42, 0.12);
+  --lab-text: #0f172a;
+  --lab-muted: #475569;
+  color-scheme: light;
+}
+
+html.dark {
+  --lab-bg: #060913;
+  --lab-surface: #0b1121;
+  --lab-elevated: #11192e;
+  --lab-border: rgba(56, 189, 248, 0.16);
+  --lab-text: #e2e8f0;
+  --lab-muted: #94a3b8;
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--lab-bg);
+  color: var(--lab-text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Custom scientific scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.35);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.5);
+}
+
+@layer components {
+  .sci-card {
+    @apply rounded-xl border bg-[var(--lab-surface)] border-[var(--lab-border)] shadow-sm transition-colors;
+  }
+
+  .glass-panel {
+    @apply rounded-xl border border-[var(--lab-border)] backdrop-blur-md;
+    background: rgba(255, 255, 255, 0.78);
+  }
+  html.dark .glass-panel {
+    background: rgba(11, 17, 33, 0.8);
+  }
+
+  .sci-input {
+    @apply w-full rounded-lg border border-[var(--lab-border)] bg-[var(--lab-elevated)] px-3 py-2 text-sm text-[var(--lab-text)] placeholder:text-slate-500 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400/50 transition;
+  }
+
+  .sci-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:from-cyan-400 hover:to-blue-500 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed transition;
+  }
+
+  .sci-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--lab-border)] bg-[var(--lab-elevated)] px-3.5 py-2 text-sm font-medium text-[var(--lab-text)] hover:border-cyan-400/50 hover:text-cyan-400 disabled:opacity-50 disabled:cursor-not-allowed transition;
+  }
+
+  .sci-btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-rose-500/30 bg-rose-500/10 px-3.5 py-2 text-sm font-medium text-rose-400 hover:bg-rose-500/20 transition;
+  }
+
+  .sci-badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+}
+
+/* Clean PDF / Print formatting for Research Workspace Reports */
+@media print {
+  aside,
+  header,
+  .no-print {
+    display: none !important;
+  }
+  body,
+  .sci-card,
+  main {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+    box-shadow: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}
